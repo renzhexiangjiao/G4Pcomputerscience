@@ -12,7 +12,7 @@ namespace G4Pcs
 {
     public partial class Form1 : Form
     {
-        double[,] coords = new double[2,10];
+        Point[,] coords = new Point[2,10];
 
         public Form1()
         {
@@ -25,7 +25,7 @@ namespace G4Pcs
             paint(g, coords);
         }
 
-        private void paint(Graphics g, double[,] coords)
+        private void paint(Graphics g, Point[,] coords)
         {
 
         }
