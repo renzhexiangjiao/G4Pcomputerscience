@@ -1,0 +1,5 @@
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csprojResolveAssemblyReference.cache
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Form1.resources
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Properties.Resources.resources
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.GenerateResource.Cache
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.CoreCompileInputs.cache

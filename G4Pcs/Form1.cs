@@ -21,7 +21,7 @@ namespace G4Pcs
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g;
+            Graphics g = new Graphics();
             paint(g, coords);
         }
 
