@@ -21,13 +21,17 @@ namespace G4Pcs
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = new Graphics();
-            paint(g, coords);
+            //Graphics g = null;
+            //paint(g, coords);
         }
 
         private void paint(Graphics g, Point[,] coords)
         {
-
+            /*
+             * zmiany 
+             * w 
+             * kodzie 
+            */
         }
     }
 }

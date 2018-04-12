@@ -3,3 +3,8 @@ C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Form1.resour
 C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Properties.Resources.resources
 C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.GenerateResource.Cache
 C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.exe.config
+C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.exe
+C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.pdb
+C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.exe
+C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.pdb
