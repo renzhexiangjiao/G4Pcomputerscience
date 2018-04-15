@@ -10,6 +10,7 @@ namespace G4Pcs
     class Joint
     {
         private Point position;
+
         public Joint(Point position)
         {
             this.position = position;

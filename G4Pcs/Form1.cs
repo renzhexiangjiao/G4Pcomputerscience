@@ -16,14 +16,18 @@ namespace G4Pcs
         public Form1()
         {
             InitializeComponent();
+            Initialize();
         }
+
+        Joint[] joints = new Joint[12];
+        Bone[] bones = new Bone[11];
 
         private void Initialize()
         {
-            Joint[] joints = new Joint[12];
+            //Joint[] joints = new Joint[12];
             joints[0] = new Joint(0, 0);
-            joints[1] = new Joint(0, 0);
-            joints[2] = new Joint(0, 0);
+            joints[1] = new Joint(20, 30);
+            joints[2] = new Joint(40, 40);
             joints[3] = new Joint(0, 0);
             joints[4] = new Joint(0, 0);
             joints[5] = new Joint(0, 0);
@@ -33,7 +37,7 @@ namespace G4Pcs
             joints[9] = new Joint(0, 0);
             joints[10] = new Joint(0, 0);
             joints[11] = new Joint(0, 0);
-            Bone[] bones = new Bone[11];
+            //Bone[] bones = new Bone[11];
             bones[0] = new Bone(joints[0], joints[1]);
             bones[1] = new Bone(joints[1], joints[2]);
             bones[2] = new Bone(joints[2], joints[3]);
@@ -49,13 +53,20 @@ namespace G4Pcs
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //Graphics g = null;
-            //paint(g, coords);
+            Graphics g = e.Graphics;
+            paint(g, joints, bones);
         }
 
-        private void paint(Graphics g, Point[,] coords)
+        private void paint(Graphics g, Joint[] joints, Bone[] bones)
         {
-
+            foreach(Joint joint in joints)
+            {
+                g.DrawEllipse(new Pen(Color.Black), joint.getPosition().X - 5, joint.getPosition().Y - 5, 10, 10);
+            }
+            foreach(Bone bone in bones)
+            {
+                g.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition(), bone.getJoint2().getPosition());
+            }
         }
     }
 }
