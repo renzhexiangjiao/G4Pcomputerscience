@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace G4Pcs
 {
-    class Bone
+    class Bone : Object
     {
         private double length;
         private Joint joint1, joint2;
-        public Bone(Joint joint1, Joint joint2)
+        public Bone(double mass, Joint joint1, Joint joint2) : base(mass)
         {
             this.joint1 = joint1;
             this.joint2 = joint2;

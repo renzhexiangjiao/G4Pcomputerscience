@@ -7,15 +7,15 @@ using System.Drawing;
 
 namespace G4Pcs
 {
-    class Joint
+    class Joint : Object
     {
         private Point position;
 
-        public Joint(Point position)
+        public Joint(double mass, Point position) : base(mass)
         {
             this.position = position;
         }
-        public Joint(int x, int y)
+        public Joint(double mass, int x, int y) : base(mass)
         {
             position = new Point(x, y);
         }
