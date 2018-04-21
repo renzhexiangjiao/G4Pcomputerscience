@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace G4Pcs
 {
@@ -19,6 +15,7 @@ namespace G4Pcs
             this.object2 = object2;
             this.distance = distance;
 
+            this.direction = 1.5 * Math.PI;
             this.value = gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
         }
     }

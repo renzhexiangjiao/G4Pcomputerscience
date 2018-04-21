@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace G4Pcs
@@ -24,7 +18,6 @@ namespace G4Pcs
 
         private void Initialize()
         {
-            //Joint[] joints = new Joint[12];
             joints[0] = new Joint(1, 30, 250);
             joints[1] = new Joint(1, 75, 250);
             joints[2] = new Joint(1, 75, 200);
@@ -37,7 +30,6 @@ namespace G4Pcs
             joints[9] = new Joint(1, 20, 50);
             joints[10] = new Joint(1, 215, 70);
             joints[11] = new Joint(1, 280, 50);
-            //Bone[] bones = new Bone[11];
             bones[0] = new Bone(1, joints[0], joints[1]);
             bones[1] = new Bone(1, joints[1], joints[2]);
             bones[2] = new Bone(1, joints[2], joints[3]);

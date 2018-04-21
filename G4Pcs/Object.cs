@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace G4Pcs
+﻿namespace G4Pcs
 {
     class Object
     {
         protected double mass;
+        protected Vector acceleration;
+        protected Vector velocity;
          
         public Object(double mass)
         {
             this.mass = mass;
         }
 
-        public double getMass()
+        public void updateVelocity()
         {
-            return mass;
+
         }
+
+        public double getMass() => mass;       
+
     }
 }
