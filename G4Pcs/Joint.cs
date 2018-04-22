@@ -1,10 +1,12 @@
 ﻿using System.Drawing;
+using System.Collections.Generic;
+using System;
 
 namespace G4Pcs
 {
     class Joint : Object
     {
-        private Point position;
+        public static List<Joint> jointList = new List<Joint>();
 
         public Joint(double mass, Point position) : base(mass)
         {
@@ -15,6 +17,10 @@ namespace G4Pcs
             position = new Point(x, y);
         }
 
-        public Point getPosition() => position;
+        public void updatePosition(int fps)
+        {
+            this.position.X += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().X;
+            this.position.Y += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().Y;
+        }       
     }
 }
