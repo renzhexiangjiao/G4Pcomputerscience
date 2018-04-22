@@ -11,6 +11,8 @@ namespace G4Pcs
 
         private double distance;
 
+        private double bounciness = 30; // default = 0
+
         public Gravity(Object object2, double distance) : base(object2)
         {
             Object Earth = new Object(5.97222E+26);
@@ -21,7 +23,7 @@ namespace G4Pcs
             if (distance > 0)
                 this.value = -gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
             else if (distance < 0)
-                this.value = gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
+                this.value = (bounciness + 32) * this.getPatient().velocity.getValue(); 
             else
                 this.value = 0;
         }
@@ -33,7 +35,7 @@ namespace G4Pcs
             if (distance > 0)
                 this.value = -gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
             else if (distance < 0)
-                this.value = 32 * this.getPatient().velocity.getValue(); //gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
+                this.value = (bounciness + 32) * this.getPatient().velocity.getValue(); 
             else
                 this.value = 0;
         }
