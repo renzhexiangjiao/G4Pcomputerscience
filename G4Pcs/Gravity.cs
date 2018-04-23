@@ -7,37 +7,15 @@ namespace G4Pcs
     {
         public static List<Gravity> gravityList = new List<Gravity>();
 
-        public const double gravitationalConstant = 6.674E-11;
+        private const double gravitationalAcceleraction = 9.80665;
 
-        private double distance;
-
-        private double bounciness = 30; // default = 0
-
-        public Gravity(Object object2, double distance) : base(object2)
+        public Gravity(Object object2) : base(object2)
         {
             Object Earth = new Object(5.97222E+26);
             this.object1 = Earth;
-            this.distance = distance;
 
+            this.value = - object2.getMass() * gravitationalAcceleraction;
             this.direction = 1.5 * Math.PI;
-            if (distance > 0)
-                this.value = -gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
-            else if (distance < 0)
-                this.value = (bounciness + 32) * this.getPatient().velocity.getValue(); 
-            else
-                this.value = 0;
-        }
-
-        public void update(double distance)
-        {
-            this.distance = distance;
-            this.direction = 1.5 * Math.PI;
-            if (distance > 0)
-                this.value = -gravitationalConstant * object1.getMass() * object2.getMass() / distance / distance;
-            else if (distance < 0)
-                this.value = (bounciness + 32) * this.getPatient().velocity.getValue(); 
-            else
-                this.value = 0;
         }
     }
 }

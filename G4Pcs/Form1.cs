@@ -6,6 +6,7 @@ namespace G4Pcs
 {
     public partial class Form1 : Form
     {
+        public static int groundLevel = 250;
 
         public Form1()
         {
@@ -41,18 +42,30 @@ namespace G4Pcs
             Bone.boneList.Add(new Bone(1, Joint.jointList[8], Joint.jointList[9]));
             Bone.boneList.Add(new Bone(1, Joint.jointList[7], Joint.jointList[10]));
             Bone.boneList.Add(new Bone(1, Joint.jointList[10], Joint.jointList[11]));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[0], sigmoid(Joint.jointList[0].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[1], sigmoid(Joint.jointList[1].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[2], sigmoid(Joint.jointList[2].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[3], sigmoid(Joint.jointList[3].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[4], sigmoid(Joint.jointList[4].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[5], sigmoid(Joint.jointList[5].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[6], sigmoid(Joint.jointList[6].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[7], sigmoid(Joint.jointList[7].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[8], sigmoid(Joint.jointList[8].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[9], sigmoid(Joint.jointList[9].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[10], sigmoid(Joint.jointList[10].getPosition().Y)));
-            Gravity.gravityList.Add(new Gravity(Joint.jointList[11], sigmoid(Joint.jointList[11].getPosition().Y)));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[0]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[1]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[2]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[3]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[4]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[5]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[6]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[7]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[8]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[9]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[10]));
+            Gravity.gravityList.Add(new Gravity(Joint.jointList[11]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[0]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[1]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[2]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[3]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[4]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[5]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[6]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[7]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[8]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[9]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[10]));
+            ResistiveForce.resistiveForceList.Add(new ResistiveForce(Joint.jointList[11]));
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -65,10 +78,7 @@ namespace G4Pcs
             {
                 e.Graphics.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition(), bone.getJoint2().getPosition());
             }
-            e.Graphics.DrawString(fps.ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 10);
-            e.Graphics.DrawString(Joint.jointList[2].velocity.getValue().ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 24);
-            e.Graphics.DrawString(Joint.jointList[2].acceleration.getValue().ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 38);
-            e.Graphics.DrawString(Gravity.gravityList[0].getValue().ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 52);
+            e.Graphics.DrawString("FPS:"+fps.ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 10);       
         }
 
         int fps = 32;
@@ -83,10 +93,6 @@ namespace G4Pcs
                 joint.updateVelocity(fps);
                 joint.updatePosition(fps);
             }
-            foreach(Gravity gravity in Gravity.gravityList)
-            {
-                gravity.update(sigmoid(gravity.getPatient().getPosition().Y));
-            }
             this.Refresh();
         }
 
@@ -97,9 +103,5 @@ namespace G4Pcs
             this.Refresh();
         }
 
-        private double sigmoid(int position)
-        {
-            return 6.371E6 * Math.Tanh(250 - position);
-        }
     }
 }

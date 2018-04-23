@@ -8,6 +8,8 @@ namespace G4Pcs
     {
         public static List<Joint> jointList = new List<Joint>();
 
+        private Point position;
+
         public Joint(double mass, Point position) : base(mass)
         {
             this.position = position;
@@ -21,6 +23,12 @@ namespace G4Pcs
         {
             this.position.X += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().X;
             this.position.Y += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().Y;
-        }       
+            if(this.position.Y >= Form1.groundLevel)
+            {
+                this.position.Y = Form1.groundLevel;
+            }
+        }
+
+        public Point getPosition() => position;
     }
 }
