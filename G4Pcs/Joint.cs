@@ -10,13 +10,30 @@ namespace G4Pcs
 
         private Point position;
 
-        public Joint(double mass, Point position) : base(mass)
+        private double angle;
+        private double deltaAngle;
+
+        private Joint parent;
+        private List<Joint> children = new List<Joint>();
+
+        public Joint(double mass, Point position, Joint parent) : base(mass)
         {
             this.position = position;
-        }
-        public Joint(double mass, int x, int y) : base(mass)
+            this.parent = parent;
+        }  
+        public Joint(double mass, int x, int y, Joint parent) : base(mass)
         {
             position = new Point(x, y);
+            this.parent = parent;
+        }
+
+        public void assignChildren()
+        {
+            foreach(Joint joint in Joint.jointList)
+            {
+                if (joint.parent!=null&&joint.parent.Equals(this))
+                    this.children.Add(joint);
+            }
         }
 
         public void updatePosition(int fps)
@@ -29,6 +46,19 @@ namespace G4Pcs
             }
         }
 
+        public void updateAngle()
+        {
+            angle += deltaAngle;
+        }
+
         public Point getPosition() => position;
+
+        public Joint getParent() => parent;
+        public Joint getChild(int index) => children[index];
+
+        public void setDeltaAngle(double deltaAngle)
+        {
+            this.deltaAngle = deltaAngle;
+        }
     }
 }
