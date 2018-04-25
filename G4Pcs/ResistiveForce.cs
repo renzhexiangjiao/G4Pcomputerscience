@@ -13,10 +13,7 @@ namespace G4Pcs
         private const double coefficient = 0.0005;
 
         public ResistiveForce(Object object2) : base(object2)
-        {
-            Object Fluid = new Object(0);
-            this.object1 = Fluid;
-
+        {           
             this.value = Math.Min(object2.velocity.getValue() * object2.velocity.getValue() * coefficient, object2.acceleration.getValue());
             this.direction = object2.velocity.getDirection() + Math.PI;
         }

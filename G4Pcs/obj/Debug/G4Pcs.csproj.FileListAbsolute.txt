@@ -8,3 +8,12 @@ C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.exe
 C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.pdb
 C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.exe
 C:\Users\user\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.pdb
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.exe.config
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.exe
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.pdb
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.exe
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\bin\Debug\G4Pcs.pdb
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csprojResolveAssemblyReference.cache
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Form1.resources
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Properties.Resources.resources
+C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.GenerateResource.Cache
