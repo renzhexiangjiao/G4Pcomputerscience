@@ -2,7 +2,7 @@
 
 namespace G4Pcs
 {
-    class Object
+    abstract class Object
     {
         protected double mass;
         /*protected*/ public Vector acceleration;

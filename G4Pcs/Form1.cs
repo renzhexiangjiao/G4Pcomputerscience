@@ -45,7 +45,7 @@ namespace G4Pcs
         {
             foreach (Joint joint in Joint.jointList)
             {
-                e.Graphics.DrawEllipse(new Pen(Color.Black), joint.getPosition().X - 5, joint.getPosition().Y - 5, 10, 10);
+                e.Graphics.FillEllipse(new SolidBrush(Color.Black), joint.getPosition().X - 4, joint.getPosition().Y - 4, 8, 8);
             }
             foreach (Bone bone in Bone.boneList)
             {
@@ -65,7 +65,6 @@ namespace G4Pcs
                 joint.updateAcceleration();
                 joint.updateVelocity(fps);
                 joint.updatePosition(fps);
-                joint.updateAngle();
             }
             this.Refresh();
         }
