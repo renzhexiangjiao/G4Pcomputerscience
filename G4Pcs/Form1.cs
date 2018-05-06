@@ -75,6 +75,5 @@ namespace G4Pcs
             prevfc = fc;
             this.Refresh();
         }
-
     }
 }
