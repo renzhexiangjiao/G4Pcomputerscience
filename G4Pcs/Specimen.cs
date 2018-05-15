@@ -51,6 +51,13 @@ namespace G4Pcs
 
             score = position.X;
         }
+         
+        public void Func
+
+        public Specimen Mutated()
+        {
+
+        }
 
         public void Update()
         {
@@ -58,5 +65,6 @@ namespace G4Pcs
         }
 
         public Point getPosition() => position;
+        public double getScore() => score;
     }
 }
