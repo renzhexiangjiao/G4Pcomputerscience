@@ -52,7 +52,10 @@ namespace G4Pcs
             score = position.X;
         }
          
-        public void Func
+        public void Function(int tick)
+        {
+
+        }
 
         public Specimen Mutated()
         {
