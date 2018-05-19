@@ -14,7 +14,7 @@ namespace G4Pcs
             int half = Generation.generationSize / 2;
             for(int i = 0; i < half; i++)
             {
-                generation.setSpecimen(i, generation.getSpecimen(i + half));
+                generation.setSpecimen(i, generation.getSpecimen(i + half).Mutated());
             }
         }
     }

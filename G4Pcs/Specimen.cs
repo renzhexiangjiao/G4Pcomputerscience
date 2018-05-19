@@ -51,17 +51,38 @@ namespace G4Pcs
 
             score = position.X;
         }
-         
-        public void Func
 
         public Specimen Mutated()
         {
 
         }
 
-        public void Update()
+        public void Update(int fps)
         {
+            foreach(Joint joint in jointList)
+            {
+                joint.updateAcceleration();
+                joint.updateVelocity(fps);
+                joint.updateAngle();
+                joint.updateAngle();
 
+            }
+            foreach(Bone bone in boneList)
+            {
+
+            }
+            foreach(Gravity gravity in gravityList)
+            {
+
+            }
+            foreach(ResistiveForce resistiveForce in resistiveForceList)
+            {
+
+            }
+            foreach(Force force in forceList)
+            {
+
+            }
         }
 
         public Point getPosition() => position;

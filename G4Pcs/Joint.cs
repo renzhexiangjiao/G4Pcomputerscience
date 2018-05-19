@@ -13,15 +13,20 @@ namespace G4Pcs
         private double angle;
         private double deltaAngle;
 
+        private double minAngle, maxAngle;
+        private double minDeltaAngle, maxDeltaAngle;
+
+
+
         private Joint parent;
         private List<Joint> children = new List<Joint>();
 
-        public Joint(double mass, Point position, Joint parent) : base(mass)
+        public Joint(double mass, Point position, Joint parent, double minAngle, double maxAngle, double minDeltaAngle, double maxDeltaAngle) : base(mass)
         {
             this.position = position;
             this.parent = parent;
         }  
-        public Joint(double mass, int x, int y, Joint parent) : base(mass)
+        public Joint(double mass, int x, int y, Joint parent, double minAngle, double maxAngle, double minDeltaAngle, double maxDeltaAngle) : base(mass)
         {
             position = new Point(x, y);
             this.parent = parent;
@@ -48,17 +53,17 @@ namespace G4Pcs
 
         public void updateAngle()
         {
-            angle += deltaAngle;
+            angle = Math.Min(Math.Max(angle + deltaAngle, minAngle), maxAngle);
+        }
+
+        public void setDeltaAngle(double value)
+        {
+            deltaAngle = value * Math.PI;
         }
 
         public Point getPosition() => position;
 
         public Joint getParent() => parent;
         public Joint getChild(int index) => children[index];
-
-        public void setDeltaAngle(double deltaAngle)
-        {
-            this.deltaAngle = deltaAngle;
-        }
     }
 }
