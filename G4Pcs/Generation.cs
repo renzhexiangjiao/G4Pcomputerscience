@@ -32,6 +32,22 @@ namespace G4Pcs
             }
         }
 
+        public Generation Mutated()
+        {
+            this.sortByScore();
+            int half = Generation.generationSize / 2;
+            Specimen[] result = new Specimen[Generation.generationSize];
+            for (int i = 0; i < half; i++)
+            {
+                result[i] = this.getSpecimen(i + half).Mutated();
+            }
+            for (int i = half; i < Generation.generationSize; i++)
+            {
+                result[i] = this.getSpecimen(i);
+            }
+            return new Generation(result);
+        }
+
         public Specimen getSpecimen(int index) => listOfSpecimina[index];
 
         public void setSpecimen(int index, Specimen specimen)

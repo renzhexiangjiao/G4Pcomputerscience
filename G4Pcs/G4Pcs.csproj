@@ -55,7 +55,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Generation.cs" />
-    <Compile Include="GeneticAlgorithm.cs" />
     <Compile Include="Gravity.cs" />
     <Compile Include="Joint.cs" />
     <Compile Include="Object.cs" />

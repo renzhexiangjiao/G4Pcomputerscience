@@ -16,7 +16,7 @@ namespace G4Pcs
         private double minAngle, maxAngle;
         private double minDeltaAngle, maxDeltaAngle;
 
-
+        private double[] coefficents = new double[50];
 
         private Joint parent;
         private List<Joint> children = new List<Joint>();
@@ -32,9 +32,9 @@ namespace G4Pcs
             this.parent = parent;
         }
 
-        public void assignChildren()
+        public void assignChildren(Specimen specimen)
         {
-            foreach(Joint joint in Joint.jointList)
+            foreach(Joint joint in specimen.jointList)
             {
                 if (joint.parent!=null&&joint.parent.Equals(this))
                     this.children.Add(joint);
@@ -58,7 +58,17 @@ namespace G4Pcs
 
         public void setDeltaAngle(double value)
         {
-            deltaAngle = value * Math.PI;
+            deltaAngle = value * Math.PI * 0.1;
+        }
+
+        public void Function()
+        {
+
+        }
+
+        public void mutateFunction(double offset)
+        {
+
         }
 
         public Point getPosition() => position;

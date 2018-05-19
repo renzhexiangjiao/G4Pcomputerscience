@@ -18,3 +18,4 @@ C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Form1.resou
 C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Properties.Resources.resources
 C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.csproj.GenerateResource.Cache
 C:\Users\frane\Source\Repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Player.resources
+C:\Users\user\source\repos\G4Pcomputerscience\G4Pcs\obj\Debug\G4Pcs.Player.resources

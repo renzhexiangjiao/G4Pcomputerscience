@@ -5,8 +5,6 @@ namespace G4Pcs
 {
     class Gravity : Force
     {
-        public static List<Gravity> gravityList = new List<Gravity>();
-
         private const double gravitationalAcceleraction = 9.80665;
 
         public Gravity(Object object2) : base(object2)

@@ -20,14 +20,14 @@ namespace G4Pcs
             this.velocity = this.velocity.add(acceleration.scaledBy(1.0 / (double)fps));
         }
 
-        public void updateAcceleration()
+        public void updateAcceleration(Specimen specimen)
         {
-            foreach (Gravity gravity in Gravity.gravityList)
+            foreach (Gravity gravity in specimen.gravityList)
             {
                 if (gravity.getPatient().Equals(this))
                     this.acceleration = this.acceleration.add(gravity.scaledBy(1.0 / this.mass));
             }
-            foreach (ResistiveForce resistiveForce in ResistiveForce.resistiveForceList)
+            foreach (ResistiveForce resistiveForce in specimen.resistiveForceList)
             {
                 if (resistiveForce.getPatient().Equals(this))
                     this.acceleration = this.acceleration.add(new ResistiveForce(this).scaledBy(1.0 / this.mass));

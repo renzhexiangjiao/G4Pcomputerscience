@@ -4,8 +4,6 @@ namespace G4Pcs
 {
     class Force : Vector
     {
-        public static List<Force> forceList = new List<Force>();
-
         protected Object object1, object2;
 
         public Force(Object object1, Object object2)
