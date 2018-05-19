@@ -15,7 +15,7 @@ namespace G4Pcs
             Specimen[] result = new Specimen[Generation.generationSize];
             for(int i = 0; i < half; i++)
             {
-                generation.setSpecimen(i, generation.getSpecimen(i + half));
+                generation.setSpecimen(i, generation.getSpecimen(i + half).Mutated());
             }
             return new Generation(result);
         }

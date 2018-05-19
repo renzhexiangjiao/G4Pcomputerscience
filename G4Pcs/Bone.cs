@@ -16,7 +16,13 @@ namespace G4Pcs
             length = Math.Sqrt(Math.Pow(joint1.getPosition().X-joint2.getPosition().X, 2)+ Math.Pow(joint1.getPosition().Y - joint2.getPosition().Y, 2));
         }
 
+        public void updateLength()
+        {
+            length = Math.Sqrt(Math.Pow(joint1.getPosition().X - joint2.getPosition().X, 2) + Math.Pow(joint1.getPosition().Y - joint2.getPosition().Y, 2));
+        }
+
         public Joint getJoint1() => joint1;
         public Joint getJoint2() => joint2;
+        public double getLength() => length;
     }
 }
