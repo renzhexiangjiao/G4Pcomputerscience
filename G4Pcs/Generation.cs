@@ -16,6 +16,19 @@ namespace G4Pcs
             this.listOfSpecimina = listOfSpecimina;
         }
 
+        public Generation()
+        {
+            for(int i = 0; i < generationSize; i++)
+            {
+                Specimen specimen = new Specimen();
+                foreach(Joint joint in specimen.jointList)
+                {
+                    joint.randomizeFunction();
+                }
+                this.listOfSpecimina[i] = specimen;
+            }
+        }
+
         public void sortByScore()
         {
             for(int i = 0; i < generationSize - 1; i++)

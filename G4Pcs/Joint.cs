@@ -6,8 +6,6 @@ namespace G4Pcs
 {
     class Joint : Object
     {
-        public static List<Joint> jointList = new List<Joint>();
-
         private Point position;
 
         private double angle;
@@ -16,7 +14,9 @@ namespace G4Pcs
         private double minAngle, maxAngle;
         private double minDeltaAngle, maxDeltaAngle;
 
-        private double[] coefficents = new double[50];
+        private Bone parentBone;
+
+        private double[] coefficients = new double[50];
 
         private Joint parent;
         private List<Joint> children = new List<Joint>();
@@ -45,7 +45,10 @@ namespace G4Pcs
         {
             this.position.X += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().X;
             this.position.Y += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().Y;
-            if(this.position.Y >= Form1.groundLevel)
+            try {
+                position.X = getParent().getPosition().X + (int)(getParentBone().getLength() * Math.Cos(Math.Atan2(getParent().getParent().getPosition().Y - getParent().getPosition().Y, getParent().getParent().getPosition().X - getParent().getPosition().X) - angle));
+            } catch(NullReferenceException e) { }
+            if (this.position.Y >= Form1.groundLevel)
             {
                 this.position.Y = Form1.groundLevel;
             }
@@ -53,7 +56,20 @@ namespace G4Pcs
 
         public void updateAngle()
         {
+            try {
+                double ax = getParent().getParent().getPosition().X;
+                double ay = getParent().getParent().getPosition().Y;
+                double bx = getParent().getPosition().X;
+                double by = getParent().getPosition().Y;
+                double cx = getPosition().X;
+                double cy = getPosition().Y;
+                angle = Math.Acos((((ax - bx) * (cx - bx)) + ((ay - by) * (cy - by)) / getParentBone().getLength() * getParentBone().getJoint1().getParentBone().getLength()));
+            } catch(NullReferenceException e) { }
             angle = Math.Min(Math.Max(angle + deltaAngle, minAngle), maxAngle);
+            if (angle==null)
+            {
+                angle = 0;
+            }
         }
 
         public void setDeltaAngle(double value)
@@ -61,19 +77,43 @@ namespace G4Pcs
             deltaAngle = value * Math.PI * 0.1;
         }
 
-        public void Function()
+        public void Function(int time)
         {
-
+            deltaAngle = 0;
+            for(int i = 0; i < coefficients.Length; i++)
+            {
+                deltaAngle += coefficients[i] * Math.Pow(time, i);
+            }
         }
 
-        public void mutateFunction(double offset)
+        public void mutateFunction()
         {
+            Random random = new Random();
+            for (int i = 0; i < coefficients.Length; i++)
+            {
+                coefficients[i] += Math.Pow(random.NextDouble() - 0.5, i);
+            }
+        }
 
+        public void randomizeFunction()
+        {
+            Random random = new Random();
+            for (int i = 0; i < coefficients.Length; i++)
+            {
+                coefficients[i] = Math.Pow(2 * random.NextDouble() - 1, i);
+            }
+        }
+
+        public void setParentBone(Bone parentBone)
+        {
+            this.parentBone = parentBone;
         }
 
         public Point getPosition() => position;
 
         public Joint getParent() => parent;
         public Joint getChild(int index) => children[index];
+
+        public Bone getParentBone() => parentBone;
     }
 }

@@ -9,6 +9,8 @@ namespace G4Pcs
         public static int groundLevel = 250;
         public static int fpr = 480;
 
+        public int updateCount = 0;
+
         public bool ASAP = false;
 
         public int specimenIndex = 0;
@@ -24,19 +26,24 @@ namespace G4Pcs
             currentSpecimen = new Specimen();
             frameTimer.Start();
             fpsTimer.Start();
+            Generation();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Joint joint in currentSpecimen.jointList)
+            if (!ASAP)
             {
-                e.Graphics.FillEllipse(new SolidBrush(Color.Black), joint.getPosition().X - 4, joint.getPosition().Y - 4, 8, 8);
+                foreach (Joint joint in currentSpecimen.jointList)
+                {
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), joint.getPosition().X - 4, joint.getPosition().Y - 4, 8, 8);
+                }
+                foreach (Bone bone in currentSpecimen.boneList)
+                {
+                    e.Graphics.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition(), bone.getJoint2().getPosition());
+                }
+                e.Graphics.DrawString("FPS:" + fps.ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 10);
             }
-            foreach (Bone bone in currentSpecimen.boneList)
-            {
-                e.Graphics.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition(), bone.getJoint2().getPosition());
-            }
-            e.Graphics.DrawString("FPS:"+fps.ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 10);       
+            e.Dispose();
         }
 
         int fps = 32;
@@ -46,32 +53,43 @@ namespace G4Pcs
         {
             fc++;
             Update();
+            if(updateCount>=fpr)
+            {
+                Run();
+            }
         }
 
         private new void Update()
         {
-            foreach (Joint joint in currentSpecimen.jointList)
-            {
-                joint.updateAcceleration(currentSpecimen);
-                if(!ASAP)
-                {
-                    joint.updateVelocity(fps);
-                    joint.updatePosition(fps);
-                }
-                else
-                {
-                    joint.updateVelocity(32);
-                    joint.updatePosition(32);
-                }
-            }
-            this.Refresh();
+            updateCount++;
+            label1.Text = "Generation:" + generationIndex;
+            label2.Text = "Specimen:" + specimenIndex;
+            //foreach (Joint joint in currentSpecimen.jointList)
+            //{
+            //    joint.updateAcceleration(currentSpecimen);
+            //    if(!ASAP)
+            //    {
+            //        joint.updateVelocity(fps);
+            //        joint.updatePosition(fps);
+            //    }
+            //    else
+            //    {
+            //        joint.updateVelocity(32);
+            //        joint.updatePosition(32);
+            //    }
+            //}
+            if (!ASAP)
+                currentSpecimen.Update(fps);
+            else
+                currentSpecimen.Update(32);
+            this.Invalidate();
         }
 
         private void fpsTimer_Tick(object sender, EventArgs e)
         {
             fps = fc - prevfc;
             prevfc = fc;
-            this.Refresh();
+            this.Invalidate();
         }
 
         private void Run()
@@ -84,35 +102,44 @@ namespace G4Pcs
                     Update();
                 }
             }
-            else
-            {
-
-            }
-            specimenIndex++;           
+            updateCount = 0;
+            specimenIndex++; 
         }
-        private void Generation(int startIndex)
+        private void Generation()
         {
-            currentGeneration = currentGeneration.Mutated();
-            for(int i = startIndex; i < G4Pcs.Generation.generationSize; i++)
-            {
-                Run();
+            try {
+                currentGeneration = currentGeneration.Mutated();
+            } catch(NullReferenceException e) {
+                currentGeneration = new G4Pcs.Generation();
             }
+            if(ASAP)
+            {
+                for(int i = specimenIndex; i < G4Pcs.Generation.generationSize; i++)
+                {
+                    Run();
+                }
+            }
+            specimenIndex %= 1000;
             generationIndex++;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            ASAP = true;
+            Generation();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            ASAP = false;
+            fpsTimer.Start();
+            frameTimer.Start();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-             
+            fpsTimer.Stop();
+            frameTimer.Stop();
         }
 
         private void button4_Click(object sender, EventArgs e)

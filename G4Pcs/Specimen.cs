@@ -39,7 +39,10 @@ namespace G4Pcs
             {
                 joint.assignChildren(this);
                 if (joint.getParent() != null)
+                {
                     boneList.Add(new Bone(1, joint, joint.getParent()));
+                    joint.setParentBone(boneList[boneList.Count - 1]);
+                }
                 gravityList.Add(new Gravity(joint));
                 resistiveForceList.Add(new ResistiveForce(joint));
             }
@@ -59,7 +62,7 @@ namespace G4Pcs
             Specimen specimen = new Specimen();
             foreach(Joint joint in specimen.jointList)
             {
-                joint.mutateFunction(0.1);
+                joint.mutateFunction();
             }
             return specimen;
         }
@@ -70,25 +73,13 @@ namespace G4Pcs
             {
                 joint.updateAcceleration(this);
                 joint.updateVelocity(fps);
-                joint.updateAngle();
+                joint.updatePosition(fps);
                 joint.updateAngle();
 
             }
             foreach(Bone bone in boneList)
             {
-
-            }
-            foreach(Gravity gravity in gravityList)
-            {
-
-            }
-            foreach(ResistiveForce resistiveForce in resistiveForceList)
-            {
-
-            }
-            foreach(Force force in forceList)
-            {
-
+                bone.updateLength();
             }
         }
 

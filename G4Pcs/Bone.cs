@@ -5,8 +5,6 @@ namespace G4Pcs
 {
     class Bone : Object
     {
-        public static List<Bone> boneList = new List<Bone>();
-
         private double length;
         private Joint joint1, joint2;
         public Bone(double mass, Joint joint1, Joint joint2) : base(mass)
