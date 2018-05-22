@@ -62,6 +62,7 @@ namespace G4Pcs
             {
                 deltaAngle += coefficients[i] * Math.Pow(time, i);
             }
+            deltaAngle = 2 * Math.PI * ((deltaAngle/(2*Math.PI)) - Math.Truncate(deltaAngle/(2*Math.PI)));
         }
 
         public void mutateFunction()
