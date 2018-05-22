@@ -12,7 +12,7 @@ namespace G4Pcs
 
         public ResistiveForce(Object object2) : base(object2)
         {           
-            this.value = Math.Min(object2.velocity.getValue() * object2.velocity.getValue() * coefficient, object2.acceleration.getValue());
+            this.value = Math.Abs(((Joint)object2).getParentBone().getLength() - ((Joint)object2).getParentBone().getDefLength()) * Math.Min(object2.velocity.getValue() * object2.velocity.getValue() * coefficient, object2.acceleration.getValue());
             this.direction = object2.velocity.getDirection() + Math.PI;
         }
     }

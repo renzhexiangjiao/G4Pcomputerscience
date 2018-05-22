@@ -12,7 +12,7 @@ namespace G4Pcs
         public List<Joint> jointList = new List<Joint>();
         public List<Bone> boneList = new List<Bone>();
 
-        public List<Force> forceList = new List<Force>();
+        public List<RestoringForce> restoringForceList = new List<RestoringForce>();
         public List<Gravity> gravityList = new List<Gravity>();
         public List<ResistiveForce> resistiveForceList = new List<ResistiveForce>();
 
@@ -23,18 +23,19 @@ namespace G4Pcs
 
         public Specimen()
         {
-            jointList.Add(new Joint(1, 150, 125, null, 0, 0, 0, 0));
-            jointList.Add(new Joint(1, 150, 50, jointList[0], Math.PI * 0.5, Math.PI * 1.5, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 75, 200, jointList[0], Math.PI * 0.1, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 75, 250, jointList[2], Math.PI, Math.PI * 2, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 30, 250, jointList[3], Math.PI * 0.5, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 225, 200, jointList[0], Math.PI * 0.1, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 225, 250, jointList[5], Math.PI, Math.PI * 2, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 270, 250, jointList[6], Math.PI * 0.5, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 85, 70, jointList[1], 0, Math.PI * 2, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 20, 50, jointList[8], 0, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 215, 70, jointList[1], 0, Math.PI * 2, -Math.PI * 0.1, Math.PI * 0.1));
-            jointList.Add(new Joint(1, 280, 50, jointList[10], 0, Math.PI, -Math.PI * 0.1, Math.PI * 0.1));
+            jointList.Add(new Joint(1, 150, 125, null));
+            jointList.Add(new Joint(1, 150, 50, jointList[0]));
+            jointList.Add(new Joint(1, 75, 200, jointList[0]));
+            jointList.Add(new Joint(1, 75, 250, jointList[2]));
+            jointList.Add(new Joint(1, 30, 250, jointList[3]));
+            jointList.Add(new Joint(1, 225, 200, jointList[0]));
+            jointList.Add(new Joint(1, 225, 250, jointList[5]));
+            jointList.Add(new Joint(1, 270, 250, jointList[6]));
+            jointList.Add(new Joint(1, 85, 70, jointList[1]));
+            jointList.Add(new Joint(1, 20, 50, jointList[8]));
+            jointList.Add(new Joint(1, 215, 70, jointList[1]));
+            jointList.Add(new Joint(1, 280, 50, jointList[10]));
+            jointList[0].setParent(jointList[1]);
             foreach (Joint joint in jointList)
             {
                 joint.assignChildren(this);
@@ -42,7 +43,8 @@ namespace G4Pcs
                 {
                     boneList.Add(new Bone(1, joint, joint.getParent()));
                     joint.setParentBone(boneList[boneList.Count - 1]);
-                }
+                    restoringForceList.Add(new RestoringForce(boneList[boneList.Count - 1], joint));
+                }     
                 gravityList.Add(new Gravity(joint));
                 resistiveForceList.Add(new ResistiveForce(joint));
             }
@@ -67,15 +69,15 @@ namespace G4Pcs
             return specimen;
         }
 
-        public void Update(int fps)
+        public void Update(int fps, int time)
         {
             foreach(Joint joint in jointList)
             {
+                if(time!=null)
+                    joint.Function(time);
                 joint.updateAcceleration(this);
                 joint.updateVelocity(fps);
                 joint.updatePosition(fps);
-                joint.updateAngle();
-
             }
             foreach(Bone bone in boneList)
             {

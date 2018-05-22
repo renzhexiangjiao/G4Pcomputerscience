@@ -68,6 +68,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResistiveForce.cs" />
+    <Compile Include="RestoringForce.cs" />
     <Compile Include="Specimen.cs" />
     <Compile Include="Vector.cs" />
     <EmbeddedResource Include="Form1.resx">

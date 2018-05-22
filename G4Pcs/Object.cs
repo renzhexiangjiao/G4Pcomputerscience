@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System;
 
 namespace G4Pcs
 {
@@ -18,6 +19,7 @@ namespace G4Pcs
         public void updateVelocity(int fps)
         {           
             this.velocity = this.velocity.add(acceleration.scaledBy(1.0 / (double)fps));
+            this.velocity.setValue(Math.Min(this.velocity.getValue(), 300));
         }
 
         public void updateAcceleration(Specimen specimen)
@@ -32,9 +34,13 @@ namespace G4Pcs
                 if (resistiveForce.getPatient().Equals(this))
                     this.acceleration = this.acceleration.add(new ResistiveForce(this).scaledBy(1.0 / this.mass));
             }
+            foreach (RestoringForce restoringForce in specimen.restoringForceList)
+            {
+                if (restoringForce.getPatient().Equals(this))
+                    this.acceleration = this.acceleration.add(new RestoringForce(((Joint)this).getParentBone(), this).scaledBy(1.0 / this.mass));
+            }
         }
 
         public double getMass() => mass;
-        
     }
 }

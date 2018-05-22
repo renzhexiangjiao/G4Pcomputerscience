@@ -23,10 +23,10 @@ namespace G4Pcs
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            currentSpecimen = new Specimen();
             frameTimer.Start();
             fpsTimer.Start();
             Generation();
+            currentSpecimen = currentGeneration.getSpecimen(0);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -79,9 +79,9 @@ namespace G4Pcs
             //    }
             //}
             if (!ASAP)
-                currentSpecimen.Update(fps);
+                currentSpecimen.Update(fps, updateCount);
             else
-                currentSpecimen.Update(32);
+                currentSpecimen.Update(32, updateCount);
             this.Invalidate();
         }
 
@@ -100,6 +100,7 @@ namespace G4Pcs
                 for (int i = 0; i < fpr; i++)
                 {
                     Update();
+                    updateCount++;
                 }
             }
             updateCount = 0;

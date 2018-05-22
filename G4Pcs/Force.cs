@@ -2,7 +2,7 @@
 
 namespace G4Pcs
 {
-    class Force : Vector
+    abstract class Force : Vector
     {
         protected Object object1, object2;
 
@@ -14,7 +14,7 @@ namespace G4Pcs
         public Force(Object object2)
         {
             this.object2 = object2;
-        }
+        }   
 
         public Object getAgent() => this.object1;
         public Object getPatient() => this.object2;
