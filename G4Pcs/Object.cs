@@ -6,8 +6,8 @@ namespace G4Pcs
     abstract class Object
     {
         protected double mass;
-        /*protected*/ public Vector acceleration;
-        /*protected*/ public Vector velocity;     
+        protected Vector acceleration;
+        protected Vector velocity;     
          
         public Object(double mass)
         {
@@ -42,5 +42,17 @@ namespace G4Pcs
         }
 
         public double getMass() => mass;
+
+        public Vector getVelocity() => velocity;
+        public Vector getAcceleration() => acceleration;
+
+        public void setVelocity(Vector velocity)
+        {
+            this.velocity = velocity;
+        }
+        public void setAcceleration(Vector acceleration)
+        {
+            this.acceleration = acceleration;
+        }
     }
 }

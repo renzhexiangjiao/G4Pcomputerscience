@@ -35,11 +35,11 @@ namespace G4Pcs
             {
                 foreach (Joint joint in currentSpecimen.jointList)
                 {
-                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), joint.getPosition().X - 4, joint.getPosition().Y - 4, 8, 8);
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), joint.getPosition().X - 4 /*- currentSpecimen.getPosition().X + 250*/, joint.getPosition().Y - 4, 8, 8);
                 }
                 foreach (Bone bone in currentSpecimen.boneList)
                 {
-                    e.Graphics.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition(), bone.getJoint2().getPosition());
+                    e.Graphics.DrawLine(new Pen(Color.Black), bone.getJoint1().getPosition().X /*- currentSpecimen.getPosition().X + 250*/, bone.getJoint1().getPosition().Y, bone.getJoint2().getPosition().X /*- currentSpecimen.getPosition().X + 250*/, bone.getJoint2().getPosition().Y);
                 }
                 e.Graphics.DrawString("FPS:" + fps.ToString(), new Font(FontFamily.GenericSansSerif, 12f), new SolidBrush(Color.Black), 10, 10);
             }
@@ -53,10 +53,14 @@ namespace G4Pcs
         {
             fc++;
             Update();
+            updateCount++;
             if(updateCount>=fpr)
             {
-                Run();
+                specimenIndex++;
+                currentSpecimen = currentGeneration.getSpecimen(specimenIndex);
+                updateCount = 0;
             }
+            
         }
 
         private new void Update()
@@ -64,6 +68,7 @@ namespace G4Pcs
             updateCount++;
             label1.Text = "Generation:" + generationIndex;
             label2.Text = "Specimen:" + specimenIndex;
+            label3.Text = "Score:" + currentSpecimen.getScore() + "\n" + currentGeneration.getSpecimen(0).getScore();
             //foreach (Joint joint in currentSpecimen.jointList)
             //{
             //    joint.updateAcceleration(currentSpecimen);
@@ -120,19 +125,26 @@ namespace G4Pcs
                     Run();
                 }
             }
-            specimenIndex %= 1000;
+            specimenIndex %= G4Pcs.Generation.generationSize;
             generationIndex++;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            frameTimer.Stop();
+            fpsTimer.Stop();
             ASAP = true;
-            Generation();
+            for (int i = 0; i < Int32.Parse(textBox1.Text); i++)
+            {
+                Generation();
+            }
+            ASAP = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             ASAP = false;
+            Generation();
             fpsTimer.Start();
             frameTimer.Start();
         }

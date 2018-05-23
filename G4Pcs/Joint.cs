@@ -39,15 +39,33 @@ namespace G4Pcs
 
         public void updatePosition(int fps)
         {
+            
+            double alfa = -Math.Atan2(getParent().getPosition().Y - getPosition().Y,
+                getParent().getPosition().X - getPosition().X);
+            //double beta = alfa + Math.Min(deltaAngle, Math.PI/20);
+
+            double px = position.X - getParent().getPosition().X;
+            double py = position.Y - getParent().getPosition().Y;
+
+            double c = Math.Cos(Math.Max(Math.Min(deltaAngle, Math.PI / 12), -Math.PI / 12));
+            double s = Math.Sin(Math.Max(Math.Min(deltaAngle, Math.PI / 12), -Math.PI / 12));
+
+            position.X = (int)(px * c - py * s) + getParent().getPosition().X;
+            position.Y = (int)(px * s + py * c) + getParent().getPosition().Y;
+
+            if (this.getParentBone().getLength() > 1.2 * this.getParentBone().getDefLength())
+            {
+                this.position.X = getParent().getPosition().X + (int)(1.2 * this.getParentBone().getDefLength() * -Math.Cos(alfa));
+                this.position.Y = getParent().getPosition().Y + (int)(1.2 * this.getParentBone().getDefLength() * Math.Sin(alfa));
+            }
+            else if(this.getParentBone().getLength() < 0.8 * this.getParentBone().getDefLength())
+            {
+                this.position.X = getParent().getPosition().X + (int)(0.8 * this.getParentBone().getDefLength() * -Math.Cos(alfa));
+                this.position.Y = getParent().getPosition().Y + (int)(0.8 * this.getParentBone().getDefLength() * Math.Sin(alfa));
+            }
+
             this.position.X += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().X;
             this.position.Y += (int)velocity.scaledBy(1.0 / (double)fps).toPoint().Y;
-
-            double alfa = Math.Atan2(getParent().getPosition().Y - getPosition().Y,
-                getParent().getPosition().X - getPosition().X);
-            double beta = alfa + deltaAngle;
-
-            position.X += Math.Min((int)(10 *(Math.Cos(beta) - Math.Cos(alfa))), 50);
-            position.Y += Math.Min((int)(10 * (Math.Sin(beta) - Math.Sin(alfa))), 50);
 
             if (this.position.Y >= Form1.groundLevel)
             {
@@ -60,26 +78,16 @@ namespace G4Pcs
             deltaAngle = 0;
             for(int i = 0; i < coefficients.Length; i++)
             {
-                deltaAngle += coefficients[i] * Math.Pow(time, i);
-            }
-            deltaAngle = 2 * Math.PI * ((deltaAngle/(2*Math.PI)) - Math.Truncate(deltaAngle/(2*Math.PI)));
-        }
-
-        public void mutateFunction()
-        {
-            Random random = new Random();
-            for (int i = 0; i < coefficients.Length; i++)
-            {
-                coefficients[i] += Math.Pow(random.NextDouble() - 0.5, i);
+                deltaAngle += coefficients[i] * Math.Sin(coefficients[(i+1)%50] * time - coefficients[(i+2)%50]);
             }
         }
 
-        public void randomizeFunction()
+        public void randomizeFunction(Random random)
         {
-            Random random = new Random();
-            for (int i = 0; i < coefficients.Length; i++)
+            
+            for (int i = 0; i < this.coefficients.Length; i++)
             {
-                coefficients[i] = 2 * Math.Pow(2 * random.NextDouble() - 1, i);
+                this.coefficients[i] = Math.Pow(2 * random.NextDouble() - 1, i);
             }
         }
 
@@ -97,6 +105,8 @@ namespace G4Pcs
 
         public Joint getParent() => parent;
         public Joint getChild(int index) => children[index];
+
+        public double getCoefficient(int index) => coefficients[index];
 
         public Bone getParentBone() => parentBone;
     }
